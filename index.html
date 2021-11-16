@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Convert JSON Data to HTML Table</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="style.css">
+
+ <style>
+    
+ th, td, input {
+ font-family:Arial, Helvetica, sans-serif;
+ color:black;
+ size: 10px;
+ /* font-weight:bold; */
+
+ }
+
+ table, th, td 
+ {
+ border: solid 1px rgb(177, 31, 31);
+ border-collapse: collapse;
+ padding: 2px 3px;
+ text-align: center;
+ margin-left: 300px;
+ font-size: x-large;
+ font-weight:bold;
+ background-color: beige;
+ }
+ th {
+ font-weight:bold;
+ color:white;
+ background-color: black;
+ }
+
+ 
+ </style>
+</head>
+<body>
+    
+     <h1 class="h" wialt="Submit" width="100" height="100"onclick="CreateTableFromJSON()">Grocery list !</h1>
+    
+    
+    
+ 
+ <p id="showData"></p>
+
+ <script>
+ function CreateTableFromJSON() {
+ var myCart = [
+        
+        {
+            "SL.NO":"1",
+            "ITEM NAME":"Noodles",
+            "QUANTITY":"2",
+            "UNIT":"Packets",
+            "DEPARTMENT":"Food",
+            "NOTES" : "Maggie",
+        },
+        {
+            "SL.NO":"2",
+            "ITEM NAME":"Handwash",
+            "QUANTITY":"1",
+            "UNIT":"bottle",
+            "DEPARTMENT":"Stationary",
+            "NOTES" : "Dettol",
+            
+        },
+        {
+            "SL.NO":"3",
+            "ITEM NAME":"Potato",
+            "QUANTITY":"1",
+            "UNIT":"kg",
+            "DEPARTMENT":"Vegetable",
+            "NOTES" : "Fresh",
+            
+        },
+        {
+            "SL.NO":"4",
+            "ITEM NAME":"Milk",
+            "QUANTITY":"2",
+            "UNIT":"Litre",
+            "DEPARTMENT":"Dairy",
+            "NOTES" : "Milma",
+            
+        },
+        {
+            "SL.NO":"5",
+            "ITEM NAME":"Rice",
+            "QUANTITY":"10",
+            "UNIT":"kg",
+            "DEPARTMENT":"Grains",
+            "NOTES" : "Bison",
+            
+        },
+        {
+            "SL.NO":"6",
+            "ITEM NAME":"Soap",
+            "QUANTITY":"3",
+            "UNIT":"Packets",
+            "DEPARTMENT":"Stationary",
+            "NOTES" : "Palmolive",
+            
+        },
+        {
+            "SL.NO":"7",
+            "ITEM NAME":"Apple",
+            "QUANTITY":"2",
+            "UNIT":"kg",
+            "DEPARTMENT":"Fruit",
+            "NOTES" : "Fresh",
+            
+        },
+        {
+            "SL.NO":"8",
+            "ITEM NAME":"Egg",
+            "QUANTITY":"1",
+            "UNIT":"Dozen",
+            "DEPARTMENT":" Eggs",
+            "NOTES":"Chicken Eggs",
+        },
+        {
+            "SL.NO":"9",
+            "ITEM NAME":"Biscuit",
+            "QUANTITY":"2",
+            "UNIT":"Packets",
+            "DEPARTMENT":"Bakery",
+            "NOTES":"Hide & Seek",
+            
+        },
+        {
+            "SL.NO":"10",
+            "ITEM NAME":"Onion",
+            "QUANTITY":"3",
+            "UNIT":"kg",
+            "DEPARTMENT":"Vegetable",
+            "NOTES":"Fresh",
+        }
+    ]
+
+ 
+ 
+ var col = [];
+ for (var i = 0; i < myCart.length; i++) {
+ for (var key in myCart[i]) {
+ if (col.indexOf(key) === -1) {
+ col.push(key);
+ }
+ }
+ }
+ 
+ // CREATE DYNAMIC TABLE.
+ var table = document.createElement("table");
+ 
+ // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+ 
+ var tr = table.insertRow(-1); // TABLE ROW.
+ 
+ for (var i = 0; i < col.length; i++) {
+ var th = document.createElement("th"); // TABLE HEADER.
+ th.innerHTML = col[i];
+ tr.appendChild(th);
+ }
+ 
+ // ADD JSON DATA TO THE TABLE AS ROWS.
+ for (var i = 0; i < myCart.length; i++) {
+ 
+ tr = table.insertRow(-1);
+ 
+ for (var j = 0; j < col.length; j++) {
+ var tabCell = tr.insertCell(-1);
+ tabCell.innerHTML = myCart[i][col[j]];
+ }
+ }
+ 
+ // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+ var divContainer = document.getElementById("showData");
+ divContainer.innerHTML = "";
+ divContainer.appendChild(table);
+ }
+ </script>
+</body>
+
+
+</html>
